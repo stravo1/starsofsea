@@ -1,16 +1,451 @@
 ---
-
+import TopCarousel from "../components/TopCarousel";
+import "../styles/global.css";
+import StickyNavbar from "../components/StickyNavBar";
+import CharacterSelection from "../components/CharacterSelection";
+import LightingProgress from "../components/LightingProgress";
+import SlideShowCase from "../components/SlideShowCase";
+import { fade } from "astro:transitions";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Astro</title>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+    </head>
+    <body class="text-stone-600">
+        <StickyNavbar client:only />
+        <div class="hero mb-4 md:mb-10 h-[60vh] md:h-auto relative">
+            <picture class="object-cover">
+                <source
+                    media="(min-width: 1440px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-1920x1000.jpg, https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x.jpg 2x"
+                />
+                <source
+                    media="(min-width: 1024px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-1440x870.jpg, https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-2880x1740.jpg 2x"
+                />
+                <source
+                    media="(min-width: 768px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-1024x500.jpg, https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-2048x1000.jpg 2x"
+                />
+                <source
+                    media="(min-width: 576px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-768x500.jpg, https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-1536x1000.jpg 2x"
+                />
+                <source
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-576x500.jpg, https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x-1152x1000.jpg 2x"
+                />
+                <img
+                    src="https://seaofstarsgame.co/wp-content/uploads/2023/08/keyart-with-accolades-copy-22x.jpg"
+                    alt=""
+                    class="object-cover w-full h-full"
+                />
+            </picture>
+            <div class="absolute bottom-10 w-full justify-center items-center">
+                <h2
+                    class="flex absolute bottom-16 md:bottom-20 w-full justify-center items-center font-garamond font-extrabold text-blue-400 text-5xl md:text-6xl"
+                >
+                    Out Now
+                </h2>
+                <ul class="flex gap-2 mb-0 justify-center items-center h-8">
+                    <li class="list-inline-item">
+                        <a
+                            href="https://store.steampowered.com/app/1244090/Sea_of_Stars/"
+                            target="_blank"
+                            class="btn"
+                            ><svg aria-hidden="true" class="steam"
+                                ><use
+                                    xlink:href="/assets/dist/images/svg/sprite.svg#steam"
+                                ></use></svg
+                            ><span class="sr-only">Steam</span></a
+                        >
+                    </li>
+                    <li class="list-inline-item">
+                        <a
+                            href="https://www.nintendo.com/games/detail/sea-of-stars-switch/"
+                            target="_blank"
+                            class="btn"
+                            ><svg aria-hidden="true" class="switch"
+                                ><use
+                                    xlink:href="/assets/dist/images/svg/sprite.svg#switch"
+                                ></use></svg
+                            ><span class="sr-only">eShop</span></a
+                        >
+                    </li>
+                    <li class="list-inline-item">
+                        <a
+                            href="https://store.playstation.com/en-us/concept/10004226"
+                            target="_blank"
+                            class="btn"
+                            ><svg aria-hidden="true" class="playstation"
+                                ><use
+                                    xlink:href="/assets/dist/images/svg/sprite.svg#playstation"
+                                ></use></svg
+                            ><span class="sr-only">PS Store</span></a
+                        >
+                    </li>
+                    <li class="list-inline-item">
+                        <a
+                            href="https://www.xbox.com/en-us/games/store/sea-of-stars-demo/9nldmqt2njwj"
+                            target="_blank"
+                            class="btn"
+                            ><svg aria-hidden="true" class="xbox"
+                                ><use
+                                    xlink:href="/assets/dist/images/svg/sprite.svg#xbox"
+                                ></use></svg
+                            ><span class="sr-only">Xbox</span></a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <TopCarousel client:load />
+        <div
+            class="sky-stars-bg relative px-0 py-4 md:p-20 text-white flex flex-col justify-center items-center floating-clouds"
+        >
+            <video
+                class="device-video w-full md:w-[90%] md:border-[8px] md:border-sky-400 my-6"
+                playsinline=""
+                autoplay="true"
+                muted=""
+                loop=""
+                preload="auto"
+            >
+                <source
+                    src="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel.mp4"
+                    type="video/mp4"
+                />
+                <source
+                    src="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel.webm"
+                    type="video/webm"
+                />
+                <picture>
+                    <source
+                        media="(min-width: 1024px)"
+                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-1080x608.jpg, https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel.jpg 2x"
+                    />
+                    <source
+                        media="(min-width: 768px)"
+                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-1023x575.jpg, https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel.jpg 2x"
+                    />
+                    <source
+                        media="(min-width: 576px)"
+                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-767x431.jpg, https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-1534x862.jpg 2x"
+                    />
+                    <source
+                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-575x323.jpg, https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel-1150x646.jpg 2x"
+                    />
+                    <img
+                        src="https://seaofstarsgame.co/wp-content/uploads/2024/02/sos-accolades-website-reel.jpg"
+                        alt=""
+                        height="575"
+                        width="1023"
+                        class="img-fluid d-block w-100"
+                    />
+                </picture>
+            </video>
+            <div class="p-4 mb-10">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-10 md:gap-20">
+                    <div
+                        class="grid-cols-[12] md:grid-cols-4 order-1 md:order-0"
+                    >
+                        <ul class="list-unstyled row justify-center">
+                            <li class="col-6">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-10.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-3-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-3.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-3.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-2-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-2.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-2.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="col-12 col-md-4 col-span-2 md:col-span-1 order-0 md:order-1"
+                    >
+                        <div
+                            class="main-award-wrapper text-center scroll-appear-fade-in-move-up"
+                        >
+                            <picture class="flex justify-center items-center">
+                                <source
+                                    srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/img-game-award-2x-1-352x498.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/img-game-award-2x-1.png 2x"
+                                />
+                                <img
+                                    src="https://seaofstarsgame.co/wp-content/uploads/2024/03/img-game-award-2x-1.png"
+                                    alt="Best Indie Game by The Game Awards"
+                                    height="498"
+                                    width="352"
+                                    class="img-fluid img-main-award"
+                                />
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="grid-cols-[12] md:grid-cols-4 order-2">
+                        <ul
+                            class="list-unstyled row justify-content-center m-awards-featured-items scroll-appear-fade-in-move-up scroll-appear-delay-100"
+                        >
+                            <li class="col-6 d-md-none">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-4-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-4.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-4.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6 d-md-none">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-9-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-9.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-9.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6 d-md-none">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-1-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-1.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-1.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                            <li class="col-6 d-md-none">
+                                <picture>
+                                    <source
+                                        srcset="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-5-192x100.png, https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-5.png 2x"
+                                    />
+                                    <img
+                                        src="https://seaofstarsgame.co/wp-content/uploads/2024/03/accolade-infold-5.png"
+                                        alt=""
+                                        height="100"
+                                        width="192"
+                                        class="img-fluid"
+                                    />
+                                </picture>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="bg-transparent border-4 text-blue-100 border-blue-400 p-4 tracking-wider mb-10"
+            >
+                GET THE PRESS KIT
+            </button>
+        </div>
+        <div class="my-4 relative w-full flex flex-col justify-center">
+            <picture class="my-2 hidden md:block md:invisible">
+                <source
+                    media="(min-width: 1024px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-1100x550.png, https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x.png 2x"
+                />
+                <source
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-700x350.png, https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-1400x700.png 2x"
+                />
+                <img
+                    src="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x.png"
+                    alt=""
+                    height="550"
+                    width="1100"
+                />
+            </picture>
+            <picture
+                class="my-2 md:absolute md:top-[-80px] w-full flex justify-center"
+            >
+                <source
+                    media="(min-width: 1024px)"
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-1100x550.png, https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x.png 2x"
+                />
+                <source
+                    srcset="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-700x350.png, https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x-1400x700.png 2x"
+                />
+                <img
+                    src="https://seaofstarsgame.co/wp-content/uploads/2020/04/img-characters-art-2@2x.png"
+                    alt=""
+                    height="550"
+                    width="1100"
+                />
+            </picture>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <SlideShowCase alt={false} client:load />
+                <SlideShowCase alt={true} client:load />
+                <SlideShowCase alt={true} client:load />
+                <SlideShowCase alt={false} client:load />
+            </div>
+        </div>
+        <div
+            class="sky-stars-bg relative px-0 py-4 md:p-20 text-white flex flex-col justify-center items-center floating-clouds"
+        >
+            <LightingProgress client:load />
+        </div>
+        <CharacterSelection client:load />
+        <footer class="l-footer relative">
+            <div class="l-footer-bottom sky-stars-bg h-[800px]">
+                <div
+                    class="l-ui-sky-bg-clouds l-ui-sky-bg-clouds-reversed h-full"
+                >
+                    <div class="l-footer-bottom-bg h-full">
+                        <div
+                            class="flex flex-col w-full h-full justify-center items-center"
+                        >
+                            <div
+                                data-scroll-appear-offset="20"
+                                class="brand scroll-appear scroll-appear-fade-in-move-up scroll-appear-is-inview"
+                            >
+                                <svg
+                                    aria-hidden="true"
+                                    style="stroke: #51EBFF; fill: #51EBFF; filter: drop-shadow(0px 0px 6px #51EBFF);"
+                                    ><use
+                                        xlink:href="/assets/dist/images/svg/sprite.svg#logo"
+                                    ></use></svg
+                                ><span class="sr-only">Sea of Stars</span>
+                            </div>
+                            <div
+                                data-scroll-appear-offset="20"
+                                class="flex flex-col justify-center items-center text-[#51EBFF] font-semibold opacity-50"
+                            >
+                                <svg
+                                    aria-hidden="true"
+                                    style="stroke: #51EBFF; fill: #51EBFF; opacity: 0.5"
+                                    class="w-24 h-24"
+                                    ><use
+                                        xlink:href="/assets/dist/images/svg/sprite.svg#logo-avatar"
+                                    ></use></svg
+                                >
+                                <div class="my-2">
+                                    © 2024 <a
+                                        href="https://sabotagestudio.com/"
+                                        target="_blank">Sabotage Studio</a>
+                                </div>
+                                All Rights Reserved
+                            </div>
+                        </div>
+                        <video
+                            class="absolute bottom-0 left-0 z-10 hidden md:block"
+                            height="600"
+                            width="750"
+                            playsinline=""
+                            autoplay=""
+                            muted=""
+                            loop=""
+                            preload="auto"
+                        >
+                            <source
+                                src="/assets/videos/img-footer-left-edge-240229.mp4"
+                                type="video/quicktime"
+                            />
+                            <source
+                                src="/assets/videos/img-footer-left-edge.webm"
+                                type="video/webm"
+                            />
+                            <picture>
+                                <source
+                                    type="image/webp"
+                                    media="(min-width: 1024px)"
+                                    srcset="/assets/dist/images/img-footer-left-edge-240228.webp, /assets/dist/images/img-footer-left-edge-240228-2x.webp 2x"
+                                />
+                                <source
+                                    type="image/png"
+                                    media="(min-width: 1024px)"
+                                    srcset="/assets/dist/images/img-footer-left-edge-240228.png, /assets/dist/images/img-footer-left-edge-240228-2x.png 2x"
+                                />
+                                <source
+                                    srcset="/assets/dist/images/spacer.gif"
+                                />
+                                <img
+                                    src="/assets/dist/images/img-footer-left-edge-240228.png"
+                                    alt=""
+                                    height="596"
+                                    width="748"
+                                    class="d-none d-lg-block bottom-img bottom-img-left"
+                                />
+                            </picture>
+                        </video>
+                        <picture class="absolute bottom-0 right-0 z-10 hidden md:block">
+                            <img
+                                src="https://seaofstarsgame.co/assets/dist/images/img-footer-right-edge-240228-2x.webp"
+                                alt=""
+                                height="530"
+                                width="476"
+                                class="d-none d-lg-block bottom-img bottom-img-right"
+                            />
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
